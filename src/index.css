@@ -1,68 +1,140 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
+
+  --color-surface: var(--surface);
+  --color-surface-light: var(--surface-light);
+  --color-surface-dark: var(--surface-dark);
+
+  --color-error: var(--error);
+  --color-error-light: var(--error-light);
+  --color-error-dark: var(--error-dark);
+  --color-error-surface: var(--error-surface);
+
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  --color-warning-dark: var(--warning-dark);
+  --color-warning-surface: var(--warning-surface);
+
+  --color-info: var(--info);
+  --color-info-light: var(--info-light);
+  --color-info-dark: var(--info-dark);
+  --color-info-surface: var(--info-surface);
+
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-success-dark: var(--success-dark);
+  --color-success-surface: var(--success-surface);
+
+  --color-on-primary: var(--on-primary);
+  --color-on-secondary: var(--on-secondary);
+  --color-background: var(--background);
+  --color-on-background: var(--on-background);
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-on-error: var(--on-error);
+  --color-on-warning: var(--on-warning);
+  --color-on-info: var(--on-info);
+  --color-on-success: var(--on-success);
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --primary: var(--color-blue-800);
+  --primary-light: var(--color-blue-700);
+  --primary-dark: var(--color-blue-900);
+  --primary-surface: var(--color-blue-100);
+  --on-primary: var(--color-blue-50);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --secondary: var(--color-amber-800);
+  --secondary-light: var(--color-amber-700);
+  --secondary-dark: var(--color-amber-900);
+  --secondary-surface: var(--color-amber-100);
+  --on-secondary: var(--color-amber-50);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --surface: var(--color-gray-100);
+  --surface-light: var(--color-gray-50);
+  --surface-dark: var(--color-gray-200);
+  --on-surface: var(--color-gray-950);
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --error: var(--color-red-700);
+  --error-light: var(--color-red-600);
+  --error-dark: var(--color-red-900);
+  --error-surface: var(--color-red-100);
+  --on-error: var(--color-red-50);
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  --warning: var(--color-amber-700);
+  --warning-light: var(--color-amber-600);
+  --warning-dark: var(--color-amber-900);
+  --warning-surface: var(--color-amber-100);
+  --on-warning: var(--color-amber-50);
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  --info: var(--color-blue-700);
+  --info-light: var(--color-blue-600);
+  --info-dark: var(--color-blue-900);
+  --info-surface: var(--color-blue-100);
+  --on-info: var(--color-blue-50);
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  --success: var(--color-green-700);
+  --success-light: var(--color-green-600);
+  --success-dark: var(--color-green-900);
+  --success-surface: var(--color-green-100);
+  --on-success: var(--color-green-50);
+
+  --background: var(--color-gray-50);
+  --on-background: var(--color-gray-950);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.dark {
+  --primary: var(--color-blue-200);
+  --primary-light: var(--color-blue-100);
+  --primary-dark: var(--color-blue-300);
+  --primary-surface: var(--color-blue-950);
+  --on-primary: var(--color-blue-950);
+
+  --secondary: var(--color-amber-200);
+  --secondary-light: var(--color-amber-100);
+  --secondary-dark: var(--color-amber-300);
+  --secondary-surface: var(--color-amber-950);
+  --on-secondary: var(--color-amber-950);
+
+  --surface: var(--color-gray-900);
+  --surface-light: var(--color-gray-800);
+  --surface-dark: var(--color-gray-950);
+  --on-surface: var(--color-gray-950);
+
+  --error: var(--color-red-200);
+  --error-light: var(--color-red-100);
+  --error-dark: var(--color-red-300);
+  --error-surface: var(--color-red-950);
+  --on-error: var(--color-red-950);
+
+  --warning: var(--color-amber-200);
+  --warning-light: var(--color-amber-100);
+  --warning-dark: var(--color-amber-300);
+  --warning-surface: var(--color-amber-950);
+  --on-warning: var(--color-amber-950);
+
+  --info: var(--color-blue-200);
+  --info-light: var(--color-blue-100);
+  --info-dark: var(--color-blue-300);
+  --info-surface: var(--color-blue-950);
+  --on-info: var(--color-blue-950);
+
+  --success: var(--color-green-200);
+  --success-light: var(--color-green-100);
+  --success-dark: var(--color-green-300);
+  --success-surface: var(--color-green-950);
+  --on-success: var(--color-green-950);
+
+  --background: var(--color-gray-950);
+  --on-background: var(--color-gray-50);
 }
