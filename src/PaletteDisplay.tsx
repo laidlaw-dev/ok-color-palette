@@ -1,37 +1,32 @@
 export const PaletteDisplay = () => {
   return (
-    <div className="width-screen h-screen flex items-stretch">
-      <div className="flex-1 bg-background">{<Colors />}</div>
-      <div className="flex-1 bg-background dark">{<Colors />}</div>
+    <div className="width-screen flex h-screen items-stretch">
+      <div className="bg-background text-foreground flex-1">{<Colors />}</div>
+      <div className="bg-background dark text-foreground flex-1">
+        {<Colors />}
+      </div>
     </div>
   );
 };
 
 interface ColorBoxProps {
-  className?: string;
-  classLight?: string;
-  classDark?: string;
+  solidClass: string;
+  outlineClass: string;
   children: React.ReactNode;
 }
 
-const ColorBox = ({
-  className,
-  classLight,
-  classDark,
-  children,
-}: ColorBoxProps) => {
+const ColorBox = ({ solidClass, outlineClass, children }: ColorBoxProps) => {
   return (
-    <div
-      className={`w-32 h-16 p-4 rounded flex flex-col items-center justify-center ${className ? className : ''}`}
-    >
-      <div>{children}</div>
-      <div className="flex items-center justify-center gap-2">
-        {classLight && (
-          <div className={`h-4 w-4 rounded-full ${classLight}`}></div>
-        )}
-        {classDark && (
-          <div className={`h-4 w-4 rounded-full ${classDark}`}></div>
-        )}
+    <div className="flex flex-col gap-2">
+      <div
+        className={`flex h-16 w-32 flex-col items-center justify-center rounded p-4 ${solidClass}`}
+      >
+        <div>{children}</div>
+      </div>
+      <div
+        className={`flex h-16 w-32 flex-col items-center justify-center rounded border p-2 ${outlineClass}`}
+      >
+        <div>{children}</div>
       </div>
     </div>
   );
@@ -39,68 +34,50 @@ const ColorBox = ({
 
 const Colors = () => {
   return (
-    <div className="p-4 flex flex-col gap-2">
-      <div className="flex gap-2 flex-wrap">
+    <div className="flex flex-col gap-2 p-4">
+      <div className="flex flex-wrap gap-2">
         <ColorBox
-          className="bg-primary text-on-primary"
-          classLight="bg-primary-light"
-          classDark="bg-primary-dark"
+          solidClass="bg-primary text-on-primary"
+          outlineClass="border-border-primary text-primary"
         >
           Primary
         </ColorBox>
         <ColorBox
-          className="bg-secondary text-on-secondary"
-          classLight="bg-secondary-light"
-          classDark="bg-secondary-dark"
+          solidClass="bg-primary text-on-primary shadow-full-small shadow-shadow-primary"
+          outlineClass="border-border-primary text-primary shadow-full-small shadow-shadow-primary"
         >
-          Secondary
-        </ColorBox>
-        <ColorBox className="bg-background text-on-background">
-          Background
+          Small
         </ColorBox>
         <ColorBox
-          className="bg-surface text-on-surface"
-          classLight="bg-surface-light"
-          classDark="bg-surface-dark"
+          solidClass="bg-primary text-on-primary shadow-full-large shadow-shadow-primary"
+          outlineClass="border-border-primary text-primary shadow-full-large shadow-shadow-primary"
+        >
+          Large
+        </ColorBox>
+        <ColorBox
+          solidClass="bg-surface text-on-surface"
+          outlineClass="border-border-surface bg-surface text-on-surface"
         >
           Surface
         </ColorBox>
-      </div>
-      <div className="flex gap-2 flex-wrap">
         <ColorBox
-          className="bg-error text-on-error"
-          classLight="bg-error-light"
-          classDark="bg-error-dark"
+          solidClass="bg-surface text-on-surface shadow shadow-shadow-surface"
+          outlineClass="border-border-surface bg-surface text-on-surface shadow shadow-shadow-surface"
         >
-          Error
+          Shadow
         </ColorBox>
         <ColorBox
-          className="bg-warning text-on-warning"
-          classLight="bg-warning-light"
-          classDark="bg-warning-dark"
+          solidClass="bg-disabled text-on-disabled"
+          outlineClass="border-border-disabled  text-disabled"
         >
-          Warning
+          Disabled
         </ColorBox>
-        <ColorBox
-          className="bg-info text-on-info"
-          classLight="bg-info-light"
-          classDark="bg-info-dark"
-        >
-          Info
-        </ColorBox>
-        <ColorBox
-          className="bg-success text-on-success"
-          classLight="bg-success-light"
-          classDark="bg-success-dark"
-        >
-          Success
-        </ColorBox>
-      </div>
-      <div className="flex gap-2 flex-wrap">
-        <ColorBox className="bg-error-surface text-error">Error</ColorBox>
-        <ColorBox className="bg-warning-surface text-warning">Warning</ColorBox>
-        <ColorBox className="bg-info-surface text-info">Info</ColorBox>
-        <ColorBox className="bg-success-surface text-success">Success</ColorBox>
+        <div className="flex flex-col gap-2">
+          <div className="text-label text-sm">Control</div>
+          <div className="bg-control border-border-control w-32 rounded border px-2 py-1">
+            Control
+          </div>
+        </div>
       </div>
     </div>
   );
