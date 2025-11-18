@@ -34,6 +34,8 @@
 - Create test files in the same directory as the component with a `.test.ts` extension for functions and a `.test.tsx` extension for React components.
 - Use `@testing-library/react` for testing React components.
 - Use `@testing-library/jest-dom` for additional matchers in tests.
+- vitest is a global import, so there is no need to import `vitest`, `describe`, `it` or `expect` in test files.
+- vitest setup files are located in `vitest.setup.ts`.
 - The describe and it blocks are used for organizing tests.
 - The describe block should be the name of the function or component being tested. E.g. if the function under test is called `add`, the describe block should be `describe('add', () => { ... })`.
 - A mocked function should have the name of the function being mocked with `mock_` prefix. E.g. if the function being mocked is called `fetchData`, the mocked function should be called `mock_fetchData`.
