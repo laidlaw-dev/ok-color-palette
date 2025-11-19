@@ -43,6 +43,7 @@ export const BaseButton = ({
             className={clsx('transition duration-250 ease-in-out', {
               [sizeClasses]: true,
               [className]: className,
+              ['cursor-pointer']: !disabled,
               [`${colorClasses.base.colors} ${colorClasses.base.shadows}`]:
                 !disabled && !active && !hover,
               [`${colorClasses.hover.colors} ${colorClasses.hover.shadows}`]:
@@ -51,7 +52,7 @@ export const BaseButton = ({
                 !disabled && active,
               [`${colorClasses.focus.colors} ${colorClasses.focus.shadows}`]:
                 !disabled && !active && !hover && focus,
-              [colorClasses.disabled]: disabled,
+              [`${colorClasses.disabled} cursor-not-allowed`]: disabled,
             })}
           >
             {children}
