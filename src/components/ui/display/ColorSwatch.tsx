@@ -32,7 +32,7 @@ export const ColorSwatch = ({ color, className = '' }: ColorSwatchProps) => {
   return (
     <div
       className={clsx(
-        'border-border-surface rounded border',
+        'border-border-surface transition-background rounded border duration-1000 ease-in-out',
         { [heightClass]: Boolean(heightClass) },
         { [widthClass]: Boolean(widthClass) },
         { [className]: Boolean(className) }

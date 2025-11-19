@@ -1,24 +1,26 @@
-import { OkColor } from './lib/color';
-import { ColorSwatch } from './ui/display/ColorSwatch';
+import { OkButton } from './components/ui';
 
 export const PaletteDisplay = () => {
   return (
-    <div className="width-screen flex h-screen items-stretch">
-      <div className="bg-background text-foreground flex-1">{<Colors />}</div>
-      <div className="bg-background dark text-foreground flex-1">
-        {<Colors />}
+    <div className="flex h-screen w-screen flex-col items-center justify-center gap-4 p-4">
+      <div className="flex gap-4">
+        <OkButton>Filled</OkButton>
+        <OkButton variant="outlined">Outlined</OkButton>
+        <OkButton variant="text">Text</OkButton>
       </div>
-    </div>
-  );
-};
-
-const Colors = () => {
-  return (
-    <div className="flex flex-col gap-2 p-4">
-      <div className="flex flex-wrap gap-2">
-        <ColorSwatch color={new OkColor(0.7, 0.1, 240)} className="h-12 w-12" />
-        <ColorSwatch color={new OkColor(0.5, 0.3, 120)} />
-        <ColorSwatch color={new OkColor(0.3, 0.5, 0)} className="h-12 w-12" />
+      <div className="flex gap-4">
+        <OkButton disabled>Disabled</OkButton>
+        <OkButton variant="outlined" disabled>
+          Outlined
+        </OkButton>
+        <OkButton variant="text" disabled>
+          Text
+        </OkButton>
+      </div>
+      <div className="flex items-center gap-4">
+        <OkButton size="small">Small</OkButton>
+        <OkButton size="medium">Medium</OkButton>
+        <OkButton size="large">Large</OkButton>
       </div>
     </div>
   );
