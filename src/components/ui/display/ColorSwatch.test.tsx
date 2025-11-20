@@ -35,6 +35,14 @@ describe('ColorSwatch', () => {
     expect(swatch.className).toContain('border-border-surface');
   });
 
+  it('should apply transition classes', () => {
+    const { container } = render(<ColorSwatch color={mock_color} />);
+    const swatch = container.firstChild as HTMLElement;
+    expect(swatch.className).toContain('transition-background');
+    expect(swatch.className).toContain('duration-250');
+    expect(swatch.className).toContain('ease-in-out');
+  });
+
   it('should override height when custom h- class is provided', () => {
     const { container } = render(
       <ColorSwatch color={mock_color} className="h-12" />
@@ -72,8 +80,7 @@ describe('ColorSwatch', () => {
     );
     const swatch = container.firstChild as HTMLElement;
     expect(swatch.className).toContain('h-8');
-    // Note: This reveals a bug - w-8 is not applied when className doesn't contain 'w-'
-    // but also doesn't contain any width class
+    expect(swatch.className).toContain('w-8');
     expect(swatch.className).toContain('shadow-lg');
     expect(swatch.className).toContain('hover:scale-105');
   });
@@ -137,5 +144,41 @@ describe('ColorSwatch', () => {
     const { container } = render(<ColorSwatch color={mock_gray} />);
     const swatch = container.firstChild as HTMLElement;
     expect(swatch).toHaveStyle({ backgroundColor: mock_gray.toHex() });
+  });
+
+  it('should handle null color with radial gradient', () => {
+    const { container } = render(<ColorSwatch color={null} />);
+    const swatch = container.firstChild as HTMLElement;
+    expect(swatch).toHaveStyle({
+      background: 'radial-gradient(circle at 50%, #000000 0%, #FFFFFF 100%)',
+      opacity: '0.5',
+    });
+  });
+
+  it('should handle undefined color with radial gradient', () => {
+    const { container } = render(<ColorSwatch />);
+    const swatch = container.firstChild as HTMLElement;
+    expect(swatch).toHaveStyle({
+      background: 'radial-gradient(circle at 50%, #000000 0%, #FFFFFF 100%)',
+      opacity: '0.5',
+    });
+  });
+
+  it('should apply default size classes when color is null', () => {
+    const { container } = render(<ColorSwatch color={null} />);
+    const swatch = container.firstChild as HTMLElement;
+    expect(swatch.className).toContain('h-8');
+    expect(swatch.className).toContain('w-8');
+  });
+
+  it('should apply custom classes when color is null', () => {
+    const { container } = render(
+      <ColorSwatch color={null} className="h-12 w-16" />
+    );
+    const swatch = container.firstChild as HTMLElement;
+    expect(swatch.className).toContain('h-12');
+    expect(swatch.className).toContain('w-16');
+    expect(swatch.className).not.toContain('h-8');
+    expect(swatch.className).not.toContain('w-8');
   });
 });
