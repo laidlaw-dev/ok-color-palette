@@ -1,5 +1,8 @@
 {
   "application": {
     "name": "OK Color Palette"
+  },
+  "color_picker": {
+    "hex": "Hex"
   }
 }
