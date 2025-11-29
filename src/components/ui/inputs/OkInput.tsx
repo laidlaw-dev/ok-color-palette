@@ -1,6 +1,6 @@
 import { Field, Input } from '@headlessui/react';
 import { clsx } from 'clsx';
-import { Fragment } from 'react';
+import { Fragment, type Ref } from 'react';
 import { OkInputLabel } from './OkInputLabel';
 import { OkErrorDescription } from './OkErrorDescription';
 
@@ -9,6 +9,7 @@ interface OkInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   isTouched?: boolean;
   error?: string;
   small?: boolean;
+  ref?: Ref<HTMLInputElement>;
 }
 
 /**
@@ -38,6 +39,7 @@ export const OkInput = ({
   isTouched,
   error,
   small,
+  ref,
   ...props
 }: OkInputProps) => {
   const ctrlSizeClass = small ? 'px-2 py-1 text-sm' : 'px-4 py-2';
@@ -54,6 +56,7 @@ export const OkInput = ({
         {({ focus, disabled }) => {
           return (
             <input
+              ref={ref}
               type={type}
               value={props.value}
               onChange={props.onChange}

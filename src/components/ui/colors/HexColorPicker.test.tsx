@@ -88,10 +88,11 @@ describe('HexColorPicker', () => {
     const user = userEvent.setup();
     render(<HexColorPicker onColorChange={mock_onColorChange} />);
     const input = screen.getByRole('textbox') as HTMLInputElement;
+    await user.click(input);
+    const editiableInput = screen.getByRole('textbox') as HTMLInputElement;
+    await user.type(editiableInput, '#ABC123');
 
-    await user.type(input, '#ABC123');
-
-    expect(input.value).toBe('#ABC123');
+    expect(editiableInput.value).toBe('#ABC123');
   });
 
   it('validates hex format before calling onColorChange', async () => {
@@ -161,9 +162,7 @@ describe('HexColorPicker', () => {
       />
     );
 
-    // Note: The component currently doesn't update when colorValue prop changes
-    // This test documents current behavior
-    expect(input.value).toBe(mock_color.toHex());
+    expect(input.value).toBe(mock_newColor.toHex());
   });
 
   it('handles rapid input changes', async () => {
@@ -189,10 +188,12 @@ describe('HexColorPicker', () => {
       />
     );
     const input = screen.getByRole('textbox');
+    await user.click(input);
 
-    await user.clear(input);
+    const editiableInput = screen.getByRole('textbox') as HTMLInputElement;
+    await user.clear(editiableInput);
 
-    expect(input).toHaveValue('');
+    expect(editiableInput).toHaveValue('');
   });
 
   it('handles uppercase hex values', async () => {
