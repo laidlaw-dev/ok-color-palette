@@ -1,84 +1,83 @@
+import { useEffect, useState } from 'react';
+import { ColorSwatch } from './components/ui/display/ColorSwatch';
+import { PaletteBaseColors } from './features/palette-initialization';
+import { usePalette } from './providers/palette';
+import type { PaletteColor, PaletteVariant } from './types/palette-types';
+
 export const PaletteDisplay = () => {
-  return (
-    <div className="width-screen flex h-screen items-stretch">
-      <div className="bg-background text-foreground flex-1">{<Colors />}</div>
-      <div className="bg-background dark text-foreground flex-1">
-        {<Colors />}
-      </div>
-    </div>
-  );
+  const { palette } = usePalette();
+
+  if (palette.variants.length === 0) {
+    return <PaletteBaseColors />;
+  }
+
+  return <Palette palette={palette.variants[0]} />;
 };
 
-interface ColorBoxProps {
-  solidClass: string;
-  outlineClass: string;
-  children: React.ReactNode;
+interface PaletteProps {
+  palette: PaletteVariant;
 }
 
-const ColorBox = ({ solidClass, outlineClass, children }: ColorBoxProps) => {
+const Palette = ({ palette }: PaletteProps) => {
+  const { updateLuminance, updateChroma } = usePalette();
+  const [luminance, setLuminance] = useState(palette.luminance);
+  const [chroma, setChroma] = useState(palette.chroma);
+
+  useEffect(() => {
+    updateLuminance(luminance);
+  }, [luminance, updateLuminance]);
+
+  useEffect(() => {
+    updateChroma(chroma);
+  }, [chroma, updateChroma]);
+
   return (
-    <div className="flex flex-col gap-2">
-      <div
-        className={`flex h-16 w-32 flex-col items-center justify-center rounded p-4 ${solidClass}`}
-      >
-        <div>{children}</div>
+    <div className="bg-background-surface text-on-background-surface flex h-screen w-screen flex-col items-center justify-center p-8">
+      <div className="flex flex-col gap-2">
+        <Colors colors={palette.primary} />
+        <Colors colors={palette.secondary} />
+        <Colors colors={palette.accent} />
       </div>
-      <div
-        className={`flex h-16 w-32 flex-col items-center justify-center rounded border p-2 ${outlineClass}`}
-      >
-        <div>{children}</div>
+      <div className="mt-4 flex gap-4">
+        <div className="flex flex-col items-center">
+          <label className="mb-2">Luminance: {luminance.toFixed(2)}</label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={luminance}
+            onChange={(e) => setLuminance(parseFloat(e.target.value))}
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <label className="mb-2">Chroma: {chroma.toFixed(2)}</label>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={chroma}
+            onChange={(e) => setChroma(parseFloat(e.target.value))}
+          />
+        </div>
       </div>
     </div>
   );
 };
 
-const Colors = () => {
+interface ColorsProps {
+  colors: PaletteColor;
+}
+
+const Colors = ({ colors }: ColorsProps) => {
   return (
-    <div className="flex flex-col gap-2 p-4">
-      <div className="flex flex-wrap gap-2">
-        <ColorBox
-          solidClass="bg-primary text-on-primary"
-          outlineClass="border-border-primary text-primary"
-        >
-          Primary
-        </ColorBox>
-        <ColorBox
-          solidClass="bg-primary text-on-primary shadow-full-small shadow-shadow-primary"
-          outlineClass="border-border-primary text-primary shadow-full-small shadow-shadow-primary"
-        >
-          Small
-        </ColorBox>
-        <ColorBox
-          solidClass="bg-primary text-on-primary shadow-full-large shadow-shadow-primary"
-          outlineClass="border-border-primary text-primary shadow-full-large shadow-shadow-primary"
-        >
-          Large
-        </ColorBox>
-        <ColorBox
-          solidClass="bg-surface text-on-surface"
-          outlineClass="border-border-surface bg-surface text-on-surface"
-        >
-          Surface
-        </ColorBox>
-        <ColorBox
-          solidClass="bg-surface text-on-surface shadow shadow-shadow-surface"
-          outlineClass="border-border-surface bg-surface text-on-surface shadow shadow-shadow-surface"
-        >
-          Shadow
-        </ColorBox>
-        <ColorBox
-          solidClass="bg-disabled text-on-disabled"
-          outlineClass="border-border-disabled  text-disabled"
-        >
-          Disabled
-        </ColorBox>
-        <div className="flex flex-col gap-2">
-          <div className="text-label text-sm">Control</div>
-          <div className="bg-control border-border-control w-32 rounded border px-2 py-1">
-            Control
-          </div>
-        </div>
-      </div>
+    <div className="flex items-center gap-2">
+      <ColorSwatch className="h-16 w-16" color={colors.base} />
+      <ColorSwatch className="h-16 w-16" color={colors.light} />
+      <ColorSwatch className="h-16 w-16" color={colors.dark} />
+      <ColorSwatch className="h-16 w-16" color={colors.surface} />
+      <ColorSwatch className="h-16 w-16" color={colors.on} />
     </div>
   );
 };

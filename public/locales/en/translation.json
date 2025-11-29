@@ -1,5 +1,17 @@
 {
   "application": {
     "name": "OK Color Palette"
+  },
+  "common": {
+    "suggested": "Suggested",
+    "generate_palette": "Generate palette"
+  },
+  "color_picker": {
+    "hex": "Hex"
+  },
+  "palette": {
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "accent": "Accent"
   }
 }

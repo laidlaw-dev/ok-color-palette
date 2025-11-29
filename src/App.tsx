@@ -1,7 +1,12 @@
 import { PaletteDisplay } from './PaletteDisplay';
+import { PaletteProvider } from './providers/palette';
 
 const App = () => {
-  return <PaletteDisplay />;
+  return (
+    <PaletteProvider>
+      <PaletteDisplay />
+    </PaletteProvider>
+  );
 };
 
 export default App;
